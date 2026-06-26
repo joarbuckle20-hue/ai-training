@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parris AI Upskilling Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background: #0f172a;
+    color: #e5e7eb;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    border-bottom: 1px solid #1f2937;
+}
+
+.logo {
+    height: 40px;
+}
+
+h1 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.section-title {
+    margin-top: 40px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #9ca3af;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: #111827;
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid #1f2937;
+    transition: 0.2s;
+}
+
+.card:hover {
+    border-color: #374151;
+}
+
+.tag {
+    font-size: 11px;
+    padding: 4px 8px;
+    background: #1e3a8a;
+    border-radius: 10px;
+    display: inline-block;
+    margin-top: 6px;
+}
+
+.learn {
+    font-size: 13px;
+    color: #9ca3af;
+    margin-top: 10px;
+    line-height: 1.4;
+}
+
+a {
+    text-decoration: none;
+    color: #60a5fa;
+    font-weight: 500;
+}
+
+.tabs {
+    margin-top: 10px;
+}
+
+.tabs button {
+    background: none;
+    border: none;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.tabs button.active {
+    color: #60a5fa;
+    font-weight: 600;
+}
+
+.tab-content {
+    display: none;
+    margin-top: 10px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.progress {
+    margin-bottom: 25px;
+}
+
+.bar {
+    height: 6px;
+    background: #1f2937;
+    border-radius: 10px;
+}
+
+.fill {
+    height: 6px;
+    background: #3b82f6;
+    width: 0%;
+    border-radius: 10px;
+}
+
+.complete {
+    margin-top: 10px;
+    padding: 6px 10px;
+    border: none;
+    background: #3b82f6;
+    color: white;
+    font-size: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.complete.done {
+    background: #374151;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="parris_logo.png" class="logo">
+    <h1>AI Upskilling Hub</h1>
+</header>
+
+<div class="container">
+
+<div class="progress">
+    <div class="bar">
+        <div id="progressFill" class="fill"></div>
+    </div>
+</div>
+
+<h2 class="section-title">COURSES</h2>
+<div class="grid" id="courses"></div>
+
+<h2 class="section-title">GUIDES</h2>
+<div class="grid" id="guides"></div>
+
+</div>
+
+<script>
+
+// ✅ COURSES
+const courses = [
+  {
+    title: "AI Foundations",
+    link: "https://app.therundown.ai/courses/ai-foundations-course/part/ai-foundations-course-03-part-3?t=620",
+    learn: "Learn prompting fundamentals and practical AI usage."
+  },
+  {
+    title: "AI Workflow Automation Foundations",
+    link: "https://app.therundown.ai/courses/ai-automations-course/part/ai-automations-course-03-part-3?t=1110",
+    learn: "Build automated workflows using AI and integrations."
+  }
+];
+
+
+// ✅ GUIDES
+const guides = [
+  {
+    title: "Audit Claude’s Context",
+    link: "https://app.therundown.ai/guides/audit-claudes-context-of-you-and-your-work-in-15-minutes",
+    pdf: "context-audit.pdf",
+    learn: "Improve how AI understands your role and workflows."
+  },
+  {
+    title: "Weekly Marketing Metrics Review",
+    link: "https://app.therundown.ai/guides/build-a-weekly-marketing-report-that-runs-itself-in-claude-cowork",
+    pdf: "weekly-marketing.pdf",
+    learn: "Automate recurring reporting and insights generation."
+  },
+  {
+    title: "Daily Command Center",
+    link: "https://app.therundown.ai/guides/build-a-daily-command-center-with-claude-live-artifacts",
+    pdf: "command-center.pdf",
+    learn: "Create a real-time dashboard for tasks and KPIs."
+  },
+  {
+    title: "Turn Sessions Into Skills",
+    link: "https://app.therundown.ai/guides/turn-claude-sessions-into-skills",
+    pdf: "skill-audit.pdf",
+    learn: "Convert repeated workflows into reusable AI tools."
+  },
+  {
+    title: "AI Secretary",
+    link: "https://app.therundown.ai/guides/build-an-ai-secretary-that-finds-open-action-items-and-plans-your-day-works-with-slack-gmail-calendar",
+    pdf: "ai-secretary.pdf",
+    learn: "Automatically prioritize and organize daily work."
+  },
+  {
+    title: "Teach AI to Edit Like You",
+    link: "https://app.therundown.ai/guides/teach-your-ai-to-edit-like-you-codex-claude-code-system",
+    pdf: "ai-editing.pdf",
+    learn: "Train AI to match your personal writing style."
+  }
+];
+
+
+// ✅ Render Courses
+courses.forEach(c => {
+    document.getElementById("courses").innerHTML += `
+        <div class="card">
+            <h3>${c.title}</h3>
+            <a href="${c.link}" target  </div>
+    `;
+});
+
+
+// ✅ Render Guides
+guides.forEach((g, i) => {
+    const done = localStorage.getItem(g.title);
+
+    document.getElementById("guides").innerHTML += `
+        <div class="card">
+            <h3>${g.title}</h3>
+
+            <div class="tabs">
+                <button onclick="openTab(event,'guide-${i}')" class="active">Guide</button>
+                <button onclick="openTab(event,'res-${i}')">Resource</button>
+            </div>
+
+            <div id="guide-${i}" class="tab-content active">
+                ${g.link}Open Guide →</a>
+            </div>
+
+            <div id="res-${i}" class="tab-content">
+                <a href="${g PDF →</a>
+            </div>
+
+            <p class="learn">${g.learn}</p>
+
+            <button class="complete ${done ? 'done' : ''}"
+                onclick="toggle('${g.title}')">
+                ${done ? "Completed" : "Mark Complete"}
+            </button>
+        </div>
+    `;
+});
+
+
+// ✅ Tabs
+function openTab(evt, id) {
+    const card = evt.target.closest(".card");
+
+    card.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+    card.querySelectorAll(".tabs button").forEach(el => el.classList.remove("active"));
+
+    card.querySelector("#" + id).classList.add("active");
+    evt.target.classList.add("active");
+}
+
+
+// ✅ Completion tracking
+function toggle(title) {
+    if (localStorage.getItem(title)) {
+        localStorage.removeItem(title);
+    } else {
+        localStorage.setItem(title, true);
+    }
+    location.reload();
+}
+
+
+// ✅ Progress bar
+function updateProgress() {
+    const total = guides.length;
+    const completed = guides.filter(g => localStorage.getItem(g.title)).length;
+
+    document.getElementById("progressFill").style.width =
+        (completed / total) * 100 + "%";
+}
+
+updateProgress();
+
+</script>
+
+</body>
+</html>
