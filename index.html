@@ -18,7 +18,7 @@ body {
 header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 15px;
     padding: 20px 40px;
     border-bottom: 1px solid #1f2937;
 }
@@ -35,14 +35,13 @@ h1 {
 .container {
     max-width: 1100px;
     margin: auto;
-    padding: 40px 20px;
+    padding: 30px 20px;
 }
 
 .section-title {
     margin-top: 40px;
     margin-bottom: 15px;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 15px;
     color: #9ca3af;
 }
 
@@ -54,40 +53,22 @@ h1 {
 
 .card {
     background: #111827;
-    padding: 18px;
-    border-radius: 12px;
+    padding: 16px;
+    border-radius: 10px;
     border: 1px solid #1f2937;
-    transition: 0.2s;
 }
 
 .card:hover {
     border-color: #374151;
 }
 
-.tag {
-    font-size: 11px;
-    padding: 4px 8px;
-    background: #1e3a8a;
-    border-radius: 10px;
-    display: inline-block;
-    margin-top: 6px;
-}
-
-.learn {
-    font-size: 13px;
-    color: #9ca3af;
-    margin-top: 10px;
-    line-height: 1.4;
-}
-
 a {
-    text-decoration: none;
     color: #60a5fa;
-    font-weight: 500;
+    text-decoration: none;
 }
 
 .tabs {
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .tabs button {
@@ -95,54 +76,55 @@ a {
     border: none;
     margin-right: 10px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12px;
     color: #6b7280;
 }
 
 .tabs button.active {
     color: #60a5fa;
-    font-weight: 600;
 }
 
-.tab-content {
+.tab {
     display: none;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
-.tab-content.active {
+.tab.active {
     display: block;
 }
 
-.progress {
-    margin-bottom: 25px;
-}
-
-.bar {
-    height: 6px;
-    background: #1f2937;
-    border-radius: 10px;
-}
-
-.fill {
-    height: 6px;
-    background: #3b82f6;
-    width: 0%;
-    border-radius: 10px;
+.learn {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #9ca3af;
 }
 
 .complete {
-    margin-top: 10px;
-    padding: 6px 10px;
+    margin-top: 8px;
+    padding: 6px;
+    font-size: 11px;
     border: none;
     background: #3b82f6;
     color: white;
-    font-size: 12px;
-    border-radius: 6px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
 .complete.done {
     background: #374151;
+}
+
+.bar {
+    height: 5px;
+    background: #1f2937;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.fill {
+    height: 5px;
+    background: #3b82f6;
+    width: 0%;
 }
 </style>
 </head>
@@ -156,11 +138,7 @@ a {
 
 <div class="container">
 
-<div class="progress">
-    <div class="bar">
-        <div id="progressFill" class="fill"></div>
-    </div>
-</div>
+<div class="bar"><div id="progress" class="fill"></div></div>
 
 <h2 class="section-title">COURSES</h2>
 <div class="grid" id="courses"></div>
@@ -172,7 +150,7 @@ a {
 
 <script>
 
-// ✅ COURSES
+// COURSES
 const courses = [
   {
     title: "AI Foundations",
@@ -182,127 +160,118 @@ const courses = [
   {
     title: "AI Workflow Automation Foundations",
     link: "https://app.therundown.ai/courses/ai-automations-course/part/ai-automations-course-03-part-3?t=1110",
-    learn: "Build automated workflows using AI and integrations."
+    learn: "Build automated workflows using AI."
   }
 ];
 
-
-// ✅ GUIDES
+// GUIDES
 const guides = [
   {
     title: "Audit Claude’s Context",
     link: "https://app.therundown.ai/guides/audit-claudes-context-of-you-and-your-work-in-15-minutes",
     pdf: "context-audit.pdf",
-    learn: "Improve how AI understands your role and workflows."
+    learn: "Audit and improve AI understanding of your work."
   },
   {
-    title: "Weekly Marketing Metrics Review",
+    title: "Weekly Marketing Review",
     link: "https://app.therundown.ai/guides/build-a-weekly-marketing-report-that-runs-itself-in-claude-cowork",
     pdf: "weekly-marketing.pdf",
-    learn: "Automate recurring reporting and insights generation."
+    learn: "Automate reporting workflows."
   },
   {
-    title: "Daily Command Center",
+    title: "Command Center",
     link: "https://app.therundown.ai/guides/build-a-daily-command-center-with-claude-live-artifacts",
     pdf: "command-center.pdf",
-    learn: "Create a real-time dashboard for tasks and KPIs."
+    learn: "Build a live AI dashboard."
   },
   {
-    title: "Turn Sessions Into Skills",
+    title: "Skill Audit",
     link: "https://app.therundown.ai/guides/turn-claude-sessions-into-skills",
     pdf: "skill-audit.pdf",
-    learn: "Convert repeated workflows into reusable AI tools."
+    learn: "Turn workflows into reusable skills."
   },
   {
     title: "AI Secretary",
     link: "https://app.therundown.ai/guides/build-an-ai-secretary-that-finds-open-action-items-and-plans-your-day-works-with-slack-gmail-calendar",
     pdf: "ai-secretary.pdf",
-    learn: "Automatically prioritize and organize daily work."
+    learn: "Automate daily task prioritization."
   },
   {
-    title: "Teach AI to Edit Like You",
+    title: "AI Editing System",
     link: "https://app.therundown.ai/guides/teach-your-ai-to-edit-like-you-codex-claude-code-system",
     pdf: "ai-editing.pdf",
-    learn: "Train AI to match your personal writing style."
+    learn: "Train AI to match your writing style."
   }
 ];
 
-
-// ✅ Render Courses
+// RENDER COURSES
 courses.forEach(c => {
     document.getElementById("courses").innerHTML += `
         <div class="card">
-            <h3>${c.title}</h3>
-            <a href="${c.link}" target  </div>
-    `;
-});
-
-
-// ✅ Render Guides
-guides.forEach((g, i) => {
-    const done = localStorage.getItem(g.title);
-
-    document.getElementById("guides").innerHTML += `
-        <div class="card">
-            <h3>${g.title}</h3>
-
-            <div class="tabs">
-                <button onclick="openTab(event,'guide-${i}')" class="active">Guide</button>
-                <button onclick="openTab(event,'res-${i}')">Resource</button>
-            </div>
-
-            <div id="guide-${i}" class="tab-content active">
-                ${g.link}Open Guide →</a>
-            </div>
-
-            <div id="res-${i}" class="tab-content">
-                <a href="${g PDF →</a>
-            </div>
-
-            <p class="learn">${g.learn}</p>
-
-            <button class="complete ${done ? 'done' : ''}"
-                onclick="toggle('${g.title}')">
-                ${done ? "Completed" : "Mark Complete"}
-            </button>
+            <h<div class="learn">${c.learn}</div>
         </div>
     `;
 });
 
+// RENDER GUIDES
+guides.forEach((g,i) => {
+    const done = localStorage.getItem(g.title);
 
-// ✅ Tabs
-function openTab(evt, id) {
-    const card = evt.target.closest(".card");
+    document.getElementById("guides").innerHTML += `
+        <div class="card">
 
-    card.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
-    card.querySelectorAll(".tabs button").forEach(el => el.classList.remove("active"));
+            <h3>${g.title}</h3>
 
-    card.querySelector("#" + id).classList.add("active");
-    evt.target.classList.add("active");
+            <div class="tabs">
+                <button onclick="tab(event,'g${i}')" class="active">Guide</button>
+                <button onclick="tab(event,'p${i}')">Resource</button>
+            </div>
+
+            <div id="g${i}" class="tab active">
+                ${g.link}Open guide →</a>
+            </div>
+
+            <div id="p${i}" class="tab">
+                <a href="${n PDF →</a>
+            </div>
+
+            <div class="learn">${g.learn}</div>
+
+            <button class="complete ${done?'done':''}"
+                onclick="toggle('${g.title}')">
+                ${done?'Completed':'Mark Complete'}
+            </button>
+
+        </div>
+    `;
+});
+
+function tab(e,id){
+    const card = e.target.closest(".card");
+
+    card.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+    card.querySelectorAll("button").forEach(b=>b.classList.remove("active"));
+
+    card.querySelector("#"+id).classList.add("active");
+    e.target.classList.add("active");
 }
 
-
-// ✅ Completion tracking
-function toggle(title) {
-    if (localStorage.getItem(title)) {
+function toggle(title){
+    if(localStorage.getItem(title)){
         localStorage.removeItem(title);
     } else {
-        localStorage.setItem(title, true);
+        localStorage.setItem(title,true);
     }
     location.reload();
 }
 
-
-// ✅ Progress bar
-function updateProgress() {
-    const total = guides.length;
-    const completed = guides.filter(g => localStorage.getItem(g.title)).length;
-
-    document.getElementById("progressFill").style.width =
-        (completed / total) * 100 + "%";
+function progress(){
+    let done = guides.filter(g=>localStorage.getItem(g.title)).length;
+    document.getElementById("progress").style.width =
+        (done/guides.length)*100 + "%";
 }
 
-updateProgress();
+progress();
 
 </script>
 
